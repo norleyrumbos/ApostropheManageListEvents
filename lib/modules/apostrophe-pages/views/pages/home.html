@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}Events{% endblock %}
+
+{% block beforeMain %}
+  <header>
+    <h1> Wellcome </h1>
+  </header>
+    
+    {#
+      {{ apos.area(data.page, 'header', {
+      widgets: {
+        'apostrophe-images': {
+          size: 'full',
+          limit: 3,
+          editLabel: 'Change the Slider´s Pictures',
+          controls: {
+            movable: false,
+            removable: false,
+            position: 'top-right'
+          }
+        },
+        'apostrophe-rich-text': {
+          toolbar: [ 'Styles', 'Bold', 'Italic', 'Link', 'Unlink' ],
+          styles: [
+            { name: 'Heading', element: 'h1' },
+            { name: 'Subheading', element: 'h4' },
+            { name: 'Paragraph', element: 'p' }
+          ]
+        }
+      }
+    }) }}
+  #}
+{% endblock %}
+
+{% block main %}
+  <ul class="sidenav">
+    <li><a href="/">Home</a></li>
+    <li><a class="active" href="/home">Events</a></li>
+    <li><a href="/">Contact</a></li>
+    <li><a href="/">About</a></li>
+    {% if not data.user %}
+      <li><a href="/login">Login</a></li>
+    {% endif %}
+  </ul>
+
+  <div class="main-content">
+    <h3>
+      {% if not data.user %}
+        <a class="login-link" href="/login">Login to Manage Events</a>
+      {% endif %}
+    </h3>
+
+    <h1>Upcoming Events</h1>
+
+    {#
+    {{ apos.singleton(data.page, 'textBlock', 'apostrophe-rich-text', {
+      toolbar: [ 'Styles', 'Bold', 'Italic', 'Link', 'Unlink', 'Anchor', 'Table', 'BulletedList', 'Blockquote', 'Strike',  'Subscript', 'Superscript', 'Split' ]
+    }) }}
+    #}
+
+    <h4>All upcoming events will be posted here!</h4>
+
+    <table id="customers">
+        <tr>
+          <th>Date & City</th>
+          <th>Event Details</th>
+          <th>Ticketing / Signup</th>
+        </tr>
+      </table>
+  
+      {{ apos.area(data.page, 'event', {
+        widgets: {
+          'three-column': {}
+        }
+      }) }}
+
+  </div>
+{% endblock %}
+
+{% block afterMain %}
+  {#
+    This would be a great place to put a global footer.
+  #}
+{% endblock %}
